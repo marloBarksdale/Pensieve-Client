@@ -1,26 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { AppBar, Typography } from '@mui/material';
 
-function App() {
+import React from 'react';
+import Navbar from './components/Navbar/Navbar';
+import { Container } from '@mui/system';
+import LeftNav from './components/LeftNav/LeftNav';
+import Posts from './components/Posts/Posts';
+import RightNav from './components/RightNav/RightNav';
+const App = () => {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Button variant='contained'>Learn React</Button>
-        </a>
-      </header>
-    </div>
+    <>
+      <Box>
+        <Navbar />
+      </Box>
+      <Box display='flex'>
+        <LeftNav />
+        <Posts />
+        <RightNav />
+      </Box>
+    </>
   );
-}
+};
 
 export default App;
