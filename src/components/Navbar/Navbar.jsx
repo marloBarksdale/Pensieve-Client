@@ -1,4 +1,9 @@
-import { Coronavirus, Mail, Notifications } from '@mui/icons-material';
+import {
+  ChatBubble,
+  Coronavirus,
+  Mail,
+  Notifications,
+} from '@mui/icons-material';
 import { Avatar, Badge, Box, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { StyledAppBar } from './styles';
@@ -26,7 +31,7 @@ const Navbar = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           {' '}
           <Badge badgeContent={4} color='error'>
-            <Mail />
+            <ChatBubble />
           </Badge>
           <Badge>
             <Notifications />

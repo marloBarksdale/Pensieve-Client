@@ -1,11 +1,15 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import React from 'react';
+import Post from './Post/Post';
 
 const Posts = () => {
   return (
-    <Box bgcolor='purple' flex={4}>
-      Posts
-    </Box>
+    <Stack flex={4} direction='column' padding={2} gap={3}>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+    </Stack>
   );
 };
 
