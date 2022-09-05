@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material';
+import { Box, CircularProgress, Stack } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,12 +12,13 @@ const Posts = () => {
 
   const { isSuccess, isLoading, data: posts, isError } = useGetPostsQuery();
 
-  return (
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
     <Stack flex={4} direction='column' padding={2} gap={3}>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post {...post} key={post._id} />
+      ))}
     </Stack>
   );
 };

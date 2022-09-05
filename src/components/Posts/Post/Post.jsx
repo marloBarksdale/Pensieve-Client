@@ -12,7 +12,15 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-const Post = () => {
+const Post = ({ title, author }) => {
+  const cardTitle = (
+    <>
+      {' '}
+      <Typography>{title}</Typography>
+      <Typography> {author.first_name + ' ' + author.last_name}</Typography>
+    </>
+  );
+
   return (
     <Card elevation={24}>
       <CardHeader
@@ -22,7 +30,7 @@ const Post = () => {
             <MoreVert />
           </IconButton>
         }
-        title='Shrimp and Chorizo Paella'
+        title={cardTitle}
         subheader='September 14, 2016'
       />
       <CardMedia
