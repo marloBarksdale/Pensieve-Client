@@ -7,7 +7,14 @@ export const apiSlice = createApi({
     getPosts: builder.query({
       query: () => '/',
     }),
+    login: builder.mutation({
+      query: (loginData) => ({
+        url: '/user/login',
+        body: loginData,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = apiSlice;
+export const { useGetPostsQuery, useLoginMutation } = apiSlice;
