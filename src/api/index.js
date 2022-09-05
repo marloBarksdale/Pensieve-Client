@@ -1,5 +1,13 @@
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
+export const apiSlice = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
+  endpoints: (builder) => ({
+    getPosts: builder.query({
+      query: () => '/',
+    }),
+  }),
+});
 
-export const fetchPosts = () => API.get('/');
+export const { useGetPostsQuery } = apiSlice;
