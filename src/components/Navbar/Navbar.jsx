@@ -10,7 +10,7 @@ import { StyledAppBar } from './styles';
 
 const Navbar = () => {
   return (
-    <StyledAppBar position='static'>
+    <StyledAppBar>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography
           variant='h2'

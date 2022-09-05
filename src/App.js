@@ -9,16 +9,15 @@ import Posts from './components/Posts/Posts';
 import RightNav from './components/RightNav/RightNav';
 const App = () => {
   return (
-    <>
-      <Box>
-        <Navbar />
-      </Box>
+    <Box>
+      <Navbar />
+
       <Box display='flex'>
         <LeftNav />
         <Posts />
         <RightNav />
       </Box>
-    </>
+    </Box>
   );
 };
 

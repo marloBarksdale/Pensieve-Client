@@ -45,9 +45,6 @@ const Post = () => {
         <IconButton aria-label='share'>
           <Share />
         </IconButton>
-        <IconButton aria-label='show more'>
-          <ExpandMore />
-        </IconButton>
       </CardActions>
     </Card>
   );
