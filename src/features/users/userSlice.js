@@ -29,5 +29,10 @@ export const selectUser = createSelector(
   (user) => user.user,
 );
 
+export const selectToken = createSelector(
+  (state) => state.user,
+  (user) => user.token,
+);
+
 const userReducer = userSlice.reducer;
 export default userReducer;
