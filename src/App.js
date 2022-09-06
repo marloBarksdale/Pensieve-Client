@@ -1,15 +1,19 @@
-import { Box, Button } from '@mui/material';
-import { AppBar, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import React from 'react';
-import Navbar from './components/Navbar/Navbar';
-import { Container } from '@mui/system';
+import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import InputWithIcon from './components/Auth/Auth';
 import LeftNav from './components/LeftNav/LeftNav';
+import Navbar from './components/Navbar/Navbar';
 import Posts from './components/Posts/Posts';
 import RightNav from './components/RightNav/RightNav';
-import { Route, Router, Routes } from 'react-router-dom';
-import InputWithIcon from './components/Auth/Auth';
+import { selectUser } from './features/users/userSlice';
 const App = () => {
+  const user = useSelector((state) => selectUser(state));
+
+  console.log(user);
+
   return (
     <Box>
       <Navbar />

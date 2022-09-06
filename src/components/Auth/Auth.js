@@ -9,22 +9,31 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { useRef } from 'react';
 import { useLoginMutation } from '../../api';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../features/users/userSlice';
 
 export default function InputWithIcon() {
   const emailRef = useRef();
+  const dispatch = useDispatch();
   const passwordRef = useRef();
+  const navigate = useNavigate();
+  const [login, { isLoading, data }] = useLoginMutation();
 
-  const [login, { isLoading }] = useLoginMutation();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email);
+
     try {
-      login({ email, password }).unwrap();
+      const payload = await login({ email, password }).unwrap();
+
+      if (payload.user) {
+        dispatch(setUser(payload));
+        navigate('/');
+      }
     } catch (error) {
-      console.log('Failed to login', error);
+      console.log(error);
     }
   };
   return (
