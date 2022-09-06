@@ -22,6 +22,7 @@ const App = () => {
           path='/login'
           element={!user ? <InputWithIcon /> : <Navigate to='/' replace />}
         />
+
         <Route
           path='/'
           element={

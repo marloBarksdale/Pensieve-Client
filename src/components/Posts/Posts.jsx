@@ -11,7 +11,7 @@ const Posts = () => {
     <CircularProgress />
   ) : (
     <Stack flex={4} direction='column' padding={2} gap={3}>
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <Post {...post} key={post._id} />
       ))}
     </Stack>
