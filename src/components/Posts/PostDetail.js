@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -18,6 +19,10 @@ const PostDetail = () => {
         <h2>Post not found!</h2>
       </section>
     );
+  }
+
+  if (isLoading) {
+    return <CircularProgress />;
   }
 
   return (
