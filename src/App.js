@@ -7,6 +7,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import InputWithIcon from './components/Auth/Auth';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import PostDetail from './components/Posts/PostDetail';
 import { selectUser } from './features/users/userSlice';
 
 const App = () => {
@@ -16,15 +17,20 @@ const App = () => {
     <Box>
       <Navbar />
       <Routes>
-        <Route
-          path='/login'
-          element={!user ? <InputWithIcon /> : <Navigate to='/' replace />}
-        />
-
-        <Route
-          path='/'
-          element={user ? <Home /> : <Navigate to='/login' replace />}
-        ></Route>
+        <Route path='/' element={user ? <Home /> : <InputWithIcon />}>
+          <Route
+            path='login'
+            element={
+              !user ? <InputWithIcon /> : <Navigate to='/posts' replace />
+            }
+          />
+          <Route
+            path='posts'
+            element={user ? <Home /> : <Navigate to='/login' />}
+          >
+            <Route path=':id' element={<PostDetail />} />
+          </Route>
+        </Route>
       </Routes>
     </Box>
   );

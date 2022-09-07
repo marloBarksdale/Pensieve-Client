@@ -10,7 +10,8 @@ import Post from './Post/Post';
 const Posts = () => {
   const user = useSelector((state) => selectUser(state));
   const [skip, setSkip] = useState(true);
-
+  console.log('posts');
+  //Stop query if there is no user present
   useEffect(() => {
     if (user) {
       setSkip(false);
@@ -20,7 +21,6 @@ const Posts = () => {
   }, [user]);
   const { isLoading, data: posts } = useGetPostsQuery('', { skip });
 
-  console.log('posts');
   return isLoading ? (
     <CircularProgress />
   ) : (

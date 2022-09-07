@@ -17,6 +17,9 @@ export const apiSlice = createApi({
     getPosts: builder.query({
       query: () => '/',
     }),
+    getPost: builder.query({
+      query: (id) => `/posts/${id}`,
+    }),
     login: builder.mutation({
       query: (loginData) => ({
         url: '/user/login',
@@ -34,5 +37,9 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetPostsQuery, useLoginMutation, useLogoutMutation } =
-  apiSlice;
+export const {
+  useGetPostsQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  useGetPostQuery,
+} = apiSlice;

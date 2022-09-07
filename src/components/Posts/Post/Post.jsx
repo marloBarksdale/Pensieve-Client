@@ -1,6 +1,7 @@
 import { Favorite, MoreVert, Share } from '@mui/icons-material';
 import {
   Avatar,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,7 +11,14 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-const Post = ({ title, author }) => {
+import { useNavigate, useParams } from 'react-router-dom';
+const Post = ({ title, author, _id }) => {
+  const navigate = useNavigate();
+
+  const openPost = () => {
+    navigate(`/posts/${_id}`);
+  };
+
   const cardTitle = (
     <>
       {' '}
@@ -48,9 +56,13 @@ const Post = ({ title, author }) => {
         <IconButton aria-label='add to favorites'>
           <Favorite />
         </IconButton>
+
         <IconButton aria-label='share'>
           <Share />
         </IconButton>
+        <Button variant='contained' onClick={openPost}>
+          View
+        </Button>
       </CardActions>
     </Card>
   );
