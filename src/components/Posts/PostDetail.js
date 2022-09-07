@@ -7,32 +7,35 @@ import { useGetPostQuery } from '../../api';
 // import { ReactionButtons } from './ReactionButton';
 // import { TimeAgo } from './TimeAgo';
 
-const PostDetail = ({ match }) => {
-  const { id } = useParams();
+const PostDetail = () => {
+  // const { id } = useParams();
 
-  const { data: post } = useGetPostQuery(id);
+  // const { data: post } = useGetPostQuery(id);
 
-  if (!post) {
-    return (
-      <section>
-        <h2>Post not found!</h2>
-      </section>
-    );
-  }
+  // if (!post) {
+  //   return (
+  //     <section>
+  //       <h2>Post not found!</h2>
+  //     </section>
+  //   );
+  // }
 
   return (
-    <section>
-      <article className='post'>
-        <h2>{post.title}</h2>
-        <div></div>
+    <>
+      <h1>PostDetail</h1>
+    </>
+    // <section>
+    //   <article className='post'>
+    //     <h2>{post.title}</h2>
+    //     <div></div>
 
-        <p className='post-content'>{post.content}</p>
-      </article>
+    //     <p className='post-content'>{post.content}</p>
+    //   </article>
 
-      <Link to={`/editPost/${post.id}`} className='button'>
-        Edit Post
-      </Link>
-    </section>
+    //   <Link to={`/editPost/${post.id}`} className='button'>
+    //     Edit Post
+    //   </Link>
+    // </section>
   );
 };
 

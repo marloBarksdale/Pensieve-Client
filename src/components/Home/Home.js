@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Outlet, Route } from 'react-router-dom';
 import LeftNav from '../LeftNav/LeftNav';
 import PostDetail from '../Posts/PostDetail';
 import Posts from '../Posts/Posts';
@@ -11,7 +11,7 @@ const Home = () => {
     <Box display='flex'>
       <LeftNav />
       <Posts />
-
+      <Outlet />
       <RightNav />
     </Box>
   );
