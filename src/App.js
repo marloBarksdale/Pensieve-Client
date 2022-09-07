@@ -20,10 +20,13 @@ const App = () => {
         <Route path='/' element={user ? <Home /> : <InputWithIcon />} />
         <Route
           path='/login'
-          element={!user ? <InputWithIcon /> : <Navigate to='/posts' replace />}
+          element={!user ? <InputWithIcon /> : <Navigate to='/' replace />}
         />
 
-        <Route path='posts/:id' element={<PostDetail />} />
+        <Route
+          path='posts/:id'
+          element={user ? <PostDetail /> : <Navigate to='/login' />}
+        />
         <Route
           path='posts'
           element={user ? <Home /> : <Navigate to='/login' />}

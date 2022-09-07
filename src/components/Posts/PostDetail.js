@@ -8,34 +8,33 @@ import { useGetPostQuery } from '../../api';
 // import { TimeAgo } from './TimeAgo';
 
 const PostDetail = () => {
-  // const { id } = useParams();
+  const { id } = useParams();
 
-  // const { data: post } = useGetPostQuery(id);
+  const { data: post, isLoading } = useGetPostQuery(id);
 
-  // if (!post) {
-  //   return (
-  //     <section>
-  //       <h2>Post not found!</h2>
-  //     </section>
-  //   );
-  // }
+  if (!post && !isLoading) {
+    return (
+      <section>
+        <h2>Post not found!</h2>
+      </section>
+    );
+  }
 
   return (
     <>
-      <h1>PostDetail</h1>
+      <h2>{post.title}</h2>
+      <section>
+        <article className='post'>
+          <div></div>
+
+          <p className='post-content'>{post.content}</p>
+        </article>
+
+        <Link to={`/editPost/${post._id}`} className='button'>
+          Edit Post
+        </Link>
+      </section>
     </>
-    // <section>
-    //   <article className='post'>
-    //     <h2>{post.title}</h2>
-    //     <div></div>
-
-    //     <p className='post-content'>{post.content}</p>
-    //   </article>
-
-    //   <Link to={`/editPost/${post.id}`} className='button'>
-    //     Edit Post
-    //   </Link>
-    // </section>
   );
 };
 
