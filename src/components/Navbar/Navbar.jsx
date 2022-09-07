@@ -15,7 +15,7 @@ import { StyledAppBar } from './styles';
 const Navbar = () => {
   const user = useSelector((state) => selectUser(state));
   const token = useSelector((state) => selectToken(state));
-  const [logout, {}] = useLogoutMutation();
+  const [logout, { isLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,10 +32,9 @@ const Navbar = () => {
     if (token) {
       if (jwtDecode(token).exp * 1000 < new Date().getTime()) {
         dispatch(clearUser()); //Clear user is token is invalid
-        navigate('/');
       }
     }
-  }, [location, token]);
+  }, []);
 
   return (
     <StyledAppBar>

@@ -1,16 +1,15 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import * as React from 'react';
 import { useRef } from 'react';
-import { useLoginMutation } from '../../api';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../api';
 import { setUser } from '../../features/users/userSlice';
 
 export default function InputWithIcon() {
@@ -65,9 +64,13 @@ export default function InputWithIcon() {
           />
         </FormControl>
       </Box>
-      <Button type='submit' variant='contained'>
-        Sumbit
-      </Button>
+      {isLoading ? (
+        <CircularProgress title='Signing in....' />
+      ) : (
+        <Button type='submit' variant='contained'>
+          Sumbit
+        </Button>
+      )}
     </form>
   );
 }

@@ -1,12 +1,26 @@
 import { CircularProgress, Stack } from '@mui/material';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../api';
+import { selectUser } from '../../features/users/userSlice';
 import Post from './Post/Post';
 
 const Posts = () => {
-  const { isLoading, data: posts } = useGetPostsQuery();
+  const user = useSelector((state) => selectUser(state));
+  const [skip, setSkip] = useState(true);
 
+  useEffect(() => {
+    if (user) {
+      setSkip(false);
+    } else {
+      setSkip(true);
+    }
+  }, [user]);
+  const { isLoading, data: posts } = useGetPostsQuery('', { skip });
+
+  console.log('posts');
   return isLoading ? (
     <CircularProgress />
   ) : (
@@ -18,4 +32,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default React.memo(Posts);

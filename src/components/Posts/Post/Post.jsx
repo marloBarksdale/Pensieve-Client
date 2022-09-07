@@ -1,17 +1,15 @@
-import React from 'react';
-import { ExpandMore, Favorite, MoreVert, Share } from '@mui/icons-material';
+import { Favorite, MoreVert, Share } from '@mui/icons-material';
 import {
   Avatar,
-  Box,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   CardMedia,
-  Collapse,
   IconButton,
   Typography,
 } from '@mui/material';
+import React from 'react';
 const Post = ({ title, author }) => {
   const cardTitle = (
     <>

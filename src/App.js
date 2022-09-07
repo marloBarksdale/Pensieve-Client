@@ -5,10 +5,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import InputWithIcon from './components/Auth/Auth';
-import LeftNav from './components/LeftNav/LeftNav';
+import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
-import Posts from './components/Posts/Posts';
-import RightNav from './components/RightNav/RightNav';
 import { selectUser } from './features/users/userSlice';
 
 const App = () => {
@@ -25,17 +23,7 @@ const App = () => {
 
         <Route
           path='/'
-          element={
-            user ? (
-              <Box display='flex'>
-                <LeftNav />
-                <Posts />
-                <RightNav />
-              </Box>
-            ) : (
-              <Navigate to='/login' replace />
-            )
-          }
+          element={user ? <Home /> : <Navigate to='/login' replace />}
         ></Route>
       </Routes>
     </Box>
