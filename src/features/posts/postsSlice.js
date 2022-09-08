@@ -2,15 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 // import * as api from '../../api';
 const initialState = {
   posts: [],
-  addPost: false,
+
+  openModal: false,
 };
 
 const postSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    setAddPost: (state, action) => {
-      state.addPost = action.payload;
+    setOpenModal: (state, action) => {
+      state.openModal = action.payload;
     },
   },
   //   extraReducers(builder) {
@@ -31,7 +32,7 @@ const postSlice = createSlice({
 //   const res = await api.fetchPosts();
 //   return res.data;
 // });
-export const { setAddPost } = postSlice.actions;
+export const { setOpenModal } = postSlice.actions;
 
 const postReducer = postSlice.reducer;
 

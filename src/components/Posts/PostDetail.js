@@ -1,10 +1,14 @@
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useGetPostQuery } from '../../api';
+import { setOpenModal } from '../../features/posts/postsSlice';
+import EditPost from './EditPost';
 
 const PostDetail = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const { data: post, isLoading } = useGetPostQuery(id);
 
@@ -30,10 +34,15 @@ const PostDetail = () => {
           <p className='post-content'>{post.content}</p>
         </article>
 
-        <Link to={`/editPost/${post._id}`} className='button'>
+        <Button
+          onClick={() => {
+            dispatch(setOpenModal(true));
+          }}
+        >
           Edit Post
-        </Link>
+        </Button>
       </section>
+      <EditPost />
     </>
   );
 };
