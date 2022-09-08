@@ -2,13 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 // import * as api from '../../api';
 const initialState = {
   posts: [],
-  status: 'idle',
+  addPost: false,
 };
 
 const postSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    setAddPost: (state, action) => {
+      state.addPost = action.payload;
+    },
+  },
   //   extraReducers(builder) {
   //     builder
   //       .addCase(fetchPosts.pending, (state, action) => {
@@ -27,6 +31,7 @@ const postSlice = createSlice({
 //   const res = await api.fetchPosts();
 //   return res.data;
 // });
+export const { setAddPost } = postSlice.actions;
 
 const postReducer = postSlice.reducer;
 

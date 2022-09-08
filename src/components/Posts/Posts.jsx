@@ -1,7 +1,5 @@
 import { CircularProgress, Stack } from '@mui/material';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../api';
 import { selectUser } from '../../features/users/userSlice';
@@ -24,11 +22,14 @@ const Posts = () => {
   return isLoading ? (
     <CircularProgress />
   ) : (
-    <Stack flex={4} direction='column' padding={2} gap={3}>
-      {posts?.map((post) => (
-        <Post {...post} key={post._id} />
-      ))}
-    </Stack>
+    <>
+      {' '}
+      <Stack flex={4} direction='column' padding={2} gap={3}>
+        {posts?.map((post) => (
+          <Post {...post} key={post._id} />
+        ))}
+      </Stack>
+    </>
   );
 };
 
