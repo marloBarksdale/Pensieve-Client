@@ -59,8 +59,8 @@ const Navbar = () => {
           Pensieve{' '}
         </Typography>
         <Coronavirus sx={{ display: { xs: 'block', sm: 'none' } }} />
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {user && (
+        {user && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <Button
               variant='contained'
               color='secondary'
@@ -68,18 +68,18 @@ const Navbar = () => {
             >
               Logout
             </Button>
-          )}{' '}
-          <Badge badgeContent={4} color='error'>
-            <ChatBubble />
-          </Badge>
-          <Badge>
-            <Notifications />
-          </Badge>
-          <Avatar
-            sx={{ width: '30px', height: '30px' }}
-            // onClick={() => setOpen((prev) => !prev)}
-          />
-        </Box>
+            <Badge badgeContent={4} color='error'>
+              <ChatBubble />
+            </Badge>
+            <Badge>
+              <Notifications />
+            </Badge>
+            <Avatar
+              sx={{ width: '30px', height: '30px' }}
+              // onClick={() => setOpen((prev) => !prev)}
+            />
+          </Box>
+        )}
       </Toolbar>
     </StyledAppBar>
   );

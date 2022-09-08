@@ -7,4 +7,5 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+  gap: theme.spacing(3),
 }));

@@ -1,10 +1,7 @@
 import {
   Button,
   CircularProgress,
-  FormControl,
   Grid,
-  Input,
-  InputLabel,
   TextField,
   Typography,
 } from '@mui/material';
@@ -66,7 +63,15 @@ const Login = () => {
               inputRef={passwordRef}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            display='flex'
+            justifyContent={'center'}
+            flexDirection='column'
+            alignItems={'center'}
+            gap={2}
+          >
             {isLoading ? (
               <>
                 <CircularProgress />
