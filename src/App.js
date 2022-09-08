@@ -5,7 +5,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Auth from './components/Auth/Auth';
-import InputWithIcon from './components/Auth/Auth';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';

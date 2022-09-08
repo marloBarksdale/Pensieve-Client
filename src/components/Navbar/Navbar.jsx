@@ -3,11 +3,6 @@ import { Avatar, Badge, Box, Button, Toolbar, Typography } from '@mui/material';
 import jwtDecode from 'jwt-decode';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  unstable_HistoryRouter,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
 import { useLogoutMutation } from '../../api';
 import {
   clearUser,
@@ -19,10 +14,9 @@ import { StyledAppBar } from './styles';
 const Navbar = () => {
   const user = useSelector((state) => selectUser(state));
   const token = useSelector((state) => selectToken(state));
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
 
-  const location = useLocation();
   const handleLogout = async () => {
     if (jwtDecode(token).exp * 1000 > new Date().getTime()) {
       //Logout if token is still valid

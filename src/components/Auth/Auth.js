@@ -1,24 +1,7 @@
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import {
-  Button,
-  CircularProgress,
-  Container,
-  Divider,
-  Paper,
-} from '@mui/material';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import Input from '@mui/material/Input';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
+import { Button, Container, Divider } from '@mui/material';
 import * as React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../api';
-import { setUser } from '../../features/users/userSlice';
 import { StyledPaper } from './styles';
 
 const Auth = () => {
@@ -32,7 +15,7 @@ const Auth = () => {
     } else {
       navigate('/');
     }
-  }, [signUp]);
+  }, [signUp, navigate]);
 
   return (
     <Container maxWidth='xs'>

@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const [login, { isLoading, data }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

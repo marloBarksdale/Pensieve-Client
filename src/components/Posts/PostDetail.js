@@ -1,12 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useGetPostQuery } from '../../api';
-// import { PostAuthor } from './PostAuthor';
-// import { selectPostById } from './postsSlice';
-// import { ReactionButtons } from './ReactionButton';
-// import { TimeAgo } from './TimeAgo';
 
 const PostDetail = () => {
   const { id } = useParams();

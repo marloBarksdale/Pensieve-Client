@@ -6,10 +6,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation, useSignupMutation } from '../../api';
-import { setUser } from '../../features/users/userSlice';
+import { useSignupMutation } from '../../api';
 
 const Signup = () => {
   const firstNameRef = useRef();
@@ -17,7 +15,6 @@ const Signup = () => {
   const passwordRef = useRef();
   const emailRef = useRef();
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
 
