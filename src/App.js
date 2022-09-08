@@ -4,7 +4,10 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Auth from './components/Auth/Auth';
 import InputWithIcon from './components/Auth/Auth';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import PostDetail from './components/Posts/PostDetail';
@@ -17,11 +20,12 @@ const App = () => {
     <Box>
       <Navbar />
       <Routes>
-        <Route path='/' element={user ? <Home /> : <InputWithIcon />} />
-        <Route
-          path='/login'
-          element={!user ? <InputWithIcon /> : <Navigate to='/' replace />}
-        />
+        <Route path='/' element={user ? <Home /> : <Auth />} />
+        <Route path='/' element={<Auth />}>
+          <Route index element={<Login />} />
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<Signup />} />
+        </Route>
 
         <Route
           path='posts/:id'
