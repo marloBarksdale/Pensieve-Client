@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   FormControl,
   Grid,
   Input,
@@ -7,15 +8,42 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../api';
+import { setUser } from '../../features/users/userSlice';
 
 const Login = () => {
+  const emailRef = useRef();
+  const dispatch = useDispatch();
+  const passwordRef = useRef();
+  const navigate = useNavigate();
+  const [login, { isLoading, data }] = useLoginMutation();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    try {
+      const payload = await login({ email, password }).unwrap();
+
+      if (payload.user) {
+        dispatch(setUser(payload));
+        navigate('/');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Typography variant='h5' textAlign={'center'}>
         Login
       </Typography>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -24,6 +52,7 @@ const Login = () => {
               label='Email'
               fullWidth
               required
+              inputRef={emailRef}
             />
           </Grid>
           <Grid item xs={12}>
@@ -34,12 +63,23 @@ const Login = () => {
               fullWidth
               variant='standard'
               required
+              inputRef={passwordRef}
             />
           </Grid>
-
-          <Button type='submit' fullWidth>
-            Submit
-          </Button>
+          <Grid item xs={12}>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                type='submit'
+                fullWidth
+                sx={{ marginTop: 3 }}
+                variant='outlined'
+              >
+                Submit
+              </Button>
+            )}
+          </Grid>
         </Grid>
       </form>
     </>
