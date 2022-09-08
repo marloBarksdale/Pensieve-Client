@@ -14,7 +14,9 @@ const PostDetail = () => {
 
   const { data: post, isLoading } = useGetPostQuery(id);
 
-  useEffect(() => {}, [location]);
+  useEffect(() => {
+    dispatch(setOpenModal(false));
+  }, [location, dispatch]);
 
   if (!post && !isLoading) {
     return (

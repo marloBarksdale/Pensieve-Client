@@ -16,9 +16,18 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => '/',
+      providesTags: ['Post'],
     }),
     getPost: builder.query({
       query: (id) => `/posts/${id}`,
+    }),
+    addPost: builder.mutation({
+      query: (postBody) => ({
+        url: '/posts',
+        body: postBody,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Post'],
     }),
     login: builder.mutation({
       query: (loginData) => ({
@@ -50,4 +59,5 @@ export const {
   useLogoutMutation,
   useGetPostQuery,
   useSignupMutation,
+  useAddPostMutation,
 } = apiSlice;

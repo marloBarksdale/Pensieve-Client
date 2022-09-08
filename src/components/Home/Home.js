@@ -2,7 +2,7 @@ import { Create } from '@mui/icons-material';
 import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import LeftNav from '../LeftNav/LeftNav';
@@ -15,10 +15,10 @@ const actions = [{ icon: <Create />, name: 'Create' }];
 const Home = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const modal = useSelector((state) => state.posts.openModal);
   useEffect(() => {
     dispatch(setOpenModal(false));
-  }, [location, dispatch]);
+  }, [location, dispatch]); //Closes modal whenever the location changes
 
   return (
     <Box display='flex'>
@@ -26,8 +26,7 @@ const Home = () => {
       <Posts />
 
       <RightNav />
-
-      <AddPost />
+      {modal && <AddPost />}
 
       <Box
         sx={{

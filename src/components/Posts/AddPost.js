@@ -6,29 +6,26 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../api';
-import { setUser } from '../../features/users/userSlice';
+import { useAddPostMutation } from '../../api';
 import StyledModal from '../StyledModal';
 
 const AddPost = () => {
-  const emailRef = useRef();
-  const dispatch = useDispatch();
-  const passwordRef = useRef();
+  const textRef = useRef();
+  const titleRef = useRef();
+
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
+  const [addPost, { isLoading }] = useAddPostMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const title = titleRef.current.value;
+    const text = textRef.current.value;
 
     try {
-      const payload = await login({ email, password }).unwrap();
+      const payload = await addPost({ title, text }).unwrap();
 
-      if (payload.user) {
-        dispatch(setUser(payload));
+      if (payload.author) {
         navigate('/');
       }
     } catch (error) {
@@ -39,29 +36,31 @@ const AddPost = () => {
   return (
     <StyledModal>
       <Typography variant='h5' textAlign={'center'}>
-        Login
+        Say something...
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              name='email'
+              name='title'
               variant='standard'
-              label='Email'
+              label='Title'
               fullWidth
+              autoFocus={true}
               required
-              inputRef={emailRef}
+              inputRef={titleRef}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              name='password'
-              type='password'
-              label='Password'
+              name='text'
+              label='Text'
+              rows={5}
+              multiline
+              maxRows={10}
               fullWidth
-              variant='standard'
-              required
-              inputRef={passwordRef}
+              variant='outlined'
+              inputRef={textRef}
             />
           </Grid>
           <Grid
@@ -76,7 +75,7 @@ const AddPost = () => {
             {isLoading ? (
               <>
                 <CircularProgress />
-                <Typography variant='subtitle1'>Signing in....</Typography>
+                <Typography variant='subtitle1'>Adding Post....</Typography>
               </>
             ) : (
               <Button
