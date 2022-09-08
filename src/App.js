@@ -20,11 +20,16 @@ const App = () => {
     <Box>
       <Navbar />
       <Routes>
-        <Route path='/' element={user ? <Home /> : <Auth />} />
-        <Route path='/' element={<Auth />}>
-          <Route index element={<Login />} />
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
+        <Route path='/' element={user ? <Home /> : <Auth />}>
+          <Route index element={user ? <></> : <Login />} />
+          <Route
+            path='login'
+            element={user ? <Navigate to='/' /> : <Login />}
+          />
+          <Route
+            path='signup'
+            element={user ? <Navigate to='/' /> : <Signup />}
+          />
         </Route>
 
         <Route
@@ -35,6 +40,7 @@ const App = () => {
           path='posts'
           element={user ? <Home /> : <Navigate to='/login' />}
         ></Route>
+        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </Box>
   );

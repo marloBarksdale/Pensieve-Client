@@ -68,7 +68,10 @@ const Login = () => {
           </Grid>
           <Grid item xs={12}>
             {isLoading ? (
-              <CircularProgress />
+              <>
+                <CircularProgress />
+                <Typography variant='subtitle1'>Signing in....</Typography>
+              </>
             ) : (
               <Button
                 type='submit'
