@@ -1,7 +1,8 @@
 import { Button, CircularProgress } from '@mui/material';
 import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useGetPostQuery } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import EditPost from './EditPost';
@@ -9,8 +10,11 @@ import EditPost from './EditPost';
 const PostDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const { data: post, isLoading } = useGetPostQuery(id);
+
+  useEffect(() => {}, [location]);
 
   if (!post && !isLoading) {
     return (

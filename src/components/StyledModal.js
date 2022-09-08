@@ -1,8 +1,8 @@
-import React from 'react';
 import { Modal } from '@mui/material';
-import { StyledPaper } from './Auth/styles';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAddPost, setOpenModal } from '../features/posts/postsSlice';
+import { setOpenModal } from '../features/posts/postsSlice';
+import { StyledPaper } from './Auth/styles';
 const StyledModal = ({ children }) => {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.posts.openModal);

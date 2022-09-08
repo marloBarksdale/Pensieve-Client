@@ -1,20 +1,25 @@
 import { Create } from '@mui/icons-material';
 import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import LeftNav from '../LeftNav/LeftNav';
 import AddPost from '../Posts/AddPost';
-import EditPost from '../Posts/EditPost';
 import Posts from '../Posts/Posts';
 import RightNav from '../RightNav/RightNav';
-import StyledModal from '../StyledModal';
 
 const actions = [{ icon: <Create />, name: 'Create' }];
 
 const Home = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(setOpenModal(false));
+  }, [location, dispatch]);
+
   return (
     <Box display='flex'>
       <LeftNav />
