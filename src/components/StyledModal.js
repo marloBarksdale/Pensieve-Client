@@ -9,7 +9,11 @@ const StyledModal = ({ children }) => {
 
   return (
     <Modal
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+      }}
       open={open}
       onClose={(e, reason) => {
         if (reason === 'backdropClick') dispatch(setOpenModal(false));

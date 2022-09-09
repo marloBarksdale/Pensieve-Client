@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-const Post = ({ title, author, _id }) => {
+const Post = ({ title, author, _id, image, text }) => {
   const navigate = useNavigate();
 
   const openPost = () => {
@@ -39,19 +39,21 @@ const Post = ({ title, author, _id }) => {
         title={cardTitle}
         subheader='September 14, 2016'
       />
-      <CardMedia
-        component='img'
-        sx={{ maxHeight: '512px' }}
-        title='Paella dish'
-        image='https://i.redd.it/5hv4l3032bc01.jpg'
-      />
-      <CardContent>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
+      {image && (
+        <CardMedia
+          component='img'
+          sx={{ maxHeight: '512px' }}
+          title='Paella dish'
+          image={image.imageUrl}
+        />
+      )}
+      {text && (
+        <CardContent>
+          <Typography variant='body2' color='textSecondary' component='p'>
+            {text}
+          </Typography>
+        </CardContent>
+      )}
       <CardActions disableSpacing>
         <IconButton aria-label='add to favorites'>
           <Favorite />

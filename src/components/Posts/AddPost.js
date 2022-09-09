@@ -20,7 +20,7 @@ const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const title = titleRef.current.value;
-    const text = textRef?.current?.value || '';
+    const text = textRef.current.value;
 
     console.log('hello');
 
@@ -64,6 +64,12 @@ const AddPost = () => {
               variant='outlined'
               inputRef={textRef}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant='contained' component='label'>
+              Upload File
+              <input type='file' hidden />
+            </Button>
           </Grid>
           <Grid
             item

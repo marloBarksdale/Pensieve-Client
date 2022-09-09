@@ -1,4 +1,4 @@
-import { Button, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -27,7 +27,12 @@ const PostDetail = () => {
   }
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box width='100%' display={'flex'} justifyContent='center'>
+        {' '}
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

@@ -8,7 +8,7 @@ import Post from './Post/Post';
 const Posts = () => {
   const user = useSelector((state) => selectUser(state));
   const [skip, setSkip] = useState(true);
-  console.log('posts');
+
   //Stop query if there is no user present
   useEffect(() => {
     if (user) {
@@ -20,17 +20,16 @@ const Posts = () => {
   const { isLoading, data: posts, isFetching } = useGetPostsQuery('', { skip });
 
   return isLoading ? (
-    <Box
-      flex={4}
-      sx={{
-        top: '50%',
-        left: '50%',
-        position: 'fixed',
-        marginTop: '-12px',
-        marginLeft: '-12px',
-      }}
-    >
-      <CircularProgress />
+    <Box flex={4}>
+      <CircularProgress
+        sx={{
+          top: '50%',
+          left: '50%',
+          position: 'fixed',
+          marginTop: '-12px',
+          marginLeft: '-12px',
+        }}
+      />
     </Box>
   ) : (
     <Box
@@ -38,9 +37,13 @@ const Posts = () => {
       display='flex'
       flexDirection='column'
       justifyContent='center'
-      alignItems='center'
+      // alignItems='center'
     >
-      {isFetching && <CircularProgress sx={{ marginBottom: '1rem' }} />}
+      {isFetching && (
+        <Box width='100%' justifyContent='center' display='flex'>
+          <CircularProgress sx={{ marginBottom: '1rem' }} />{' '}
+        </Box>
+      )}
       <Stack
         direction='column'
         gap={3}
