@@ -1,7 +1,6 @@
 import { Create } from '@mui/icons-material';
 import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setOpenModal } from '../../features/posts/postsSlice';
@@ -15,6 +14,7 @@ const actions = [{ icon: <Create />, name: 'Create' }];
 const Home = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const [open, setOpen] = useState(false);
   const modal = useSelector((state) => state.posts.openModal);
   useEffect(() => {
     dispatch(setOpenModal(false));
@@ -38,22 +38,11 @@ const Home = () => {
         <SpeedDial
           ariaLabel='SpeedDial'
           hidden={false}
-          icon={<SpeedDialIcon />}
-          // onClose={handleClose}
-          // onOpen={handleOpen}
-          // open={open}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={() => {
-                dispatch(setOpenModal(true));
-              }}
-            />
-          ))}
-        </SpeedDial>
+          icon={<Create />}
+          onClick={() => {
+            dispatch(setOpenModal(true));
+          }}
+        />
       </Box>
     </Box>
   );

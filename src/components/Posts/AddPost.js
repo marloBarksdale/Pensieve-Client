@@ -20,7 +20,9 @@ const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const title = titleRef.current.value;
-    const text = textRef.current.value;
+    const text = textRef?.current?.value || '';
+
+    console.log('hello');
 
     try {
       const payload = await addPost({ title, text }).unwrap();
@@ -55,7 +57,7 @@ const AddPost = () => {
             <TextField
               name='text'
               label='Text'
-              rows={5}
+              minRows={5}
               multiline
               maxRows={10}
               fullWidth

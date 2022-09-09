@@ -17,14 +17,20 @@ const Posts = () => {
       setSkip(true);
     }
   }, [user]);
-  const { isLoading, data: posts } = useGetPostsQuery('', { skip });
+  const { isLoading, data: posts, isFetching } = useGetPostsQuery('', { skip });
 
   return isLoading ? (
     <CircularProgress />
   ) : (
     <>
       {' '}
-      <Stack flex={4} direction='column' padding={2} gap={3}>
+      <Stack
+        flex={4}
+        direction='column'
+        padding={2}
+        gap={3}
+        className={isFetching ? 'disabled' : ''}
+      >
         {posts?.map((post) => (
           <Post {...post} key={post._id} />
         ))}
