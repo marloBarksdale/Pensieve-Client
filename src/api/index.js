@@ -29,6 +29,13 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
+    editPosts: builder.mutation({
+      query: (post) => ({
+        url: `/posts/${post.id}`,
+        method: 'PATCH',
+        body: post,
+      }),
+    }),
     login: builder.mutation({
       query: (loginData) => ({
         url: '/user/login',
@@ -60,4 +67,5 @@ export const {
   useGetPostQuery,
   useSignupMutation,
   useAddPostMutation,
+  useEditPostsMutation,
 } = apiSlice;

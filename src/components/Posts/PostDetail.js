@@ -53,7 +53,7 @@ const PostDetail = () => {
           Edit Post
         </Button>
       </section>
-      <EditPost />
+      <EditPost {...post} />
     </>
   );
 };
