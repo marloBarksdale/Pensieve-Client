@@ -1,4 +1,4 @@
-import { CircularProgress, Stack } from '@mui/material';
+import { Box, CircularProgress, Container, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../api';
@@ -20,22 +20,39 @@ const Posts = () => {
   const { isLoading, data: posts, isFetching } = useGetPostsQuery('', { skip });
 
   return isLoading ? (
-    <CircularProgress />
+    <Box
+      flex={4}
+      sx={{
+        top: '50%',
+        left: '50%',
+        position: 'fixed',
+        marginTop: '-12px',
+        marginLeft: '-12px',
+      }}
+    >
+      <CircularProgress />
+    </Box>
   ) : (
-    <>
-      {' '}
+    <Box
+      flex={4}
+      display='flex'
+      flexDirection='column'
+      justifyContent='center'
+      alignItems='center'
+    >
+      {isFetching && <CircularProgress sx={{ marginBottom: '1rem' }} />}
       <Stack
-        flex={4}
         direction='column'
-        padding={2}
         gap={3}
         className={isFetching ? 'disabled' : ''}
+        paddingLeft={1}
+        paddingRight={1}
       >
         {posts?.map((post) => (
           <Post {...post} key={post._id} />
         ))}
       </Stack>
-    </>
+    </Box>
   );
 };
 

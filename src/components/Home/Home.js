@@ -21,7 +21,7 @@ const Home = () => {
   }, [location, dispatch]); //Closes modal whenever the location changes
 
   return (
-    <Box display='flex'>
+    <Box display='flex' gap={2} marginTop={1.5} justifyContent='center'>
       <LeftNav />
       <Posts />
 
