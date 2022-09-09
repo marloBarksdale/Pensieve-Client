@@ -16,10 +16,14 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => '/',
-      providesTags: ['Post'],
+      providesTags: (results = [], error, arg) => [
+        'Post',
+        ...results.map(({ _id }) => ({ type: 'Post', id: _id })),
+      ],
     }),
     getPost: builder.query({
       query: (id) => `/posts/${id}`,
+      providesTags: (result, error, arg) => [{ type: 'Post', id: arg }],
     }),
     addPost: builder.mutation({
       query: (postBody) => ({
@@ -35,6 +39,7 @@ export const apiSlice = createApi({
         method: 'PATCH',
         body: post,
       }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
     }),
     login: builder.mutation({
       query: (loginData) => ({
