@@ -17,15 +17,29 @@ import ImageUpload from './ImageUpload';
 const EditPost = (post) => {
   const [title, setTitle] = useState(post.title);
   const [text, setText] = useState(post.text);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const [editPost, { isLoading }] = useEditPostsMutation();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedPost = { id: post._id, title, text };
+    const formData = new FormData();
+    console.log(file);
+    if (file) {
+      formData.append('image', file);
+    }
 
+    formData.append('title', title);
+    formData.append('text', text);
+    formData.append('id', post._id);
+    console.log(formData.get('id'));
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(`${key}: ${value}`);
+    // }
     try {
-      const payload = await editPost({ id: post._id, title, text }).unwrap();
+      const payload = await editPost(formData).unwrap();
 
       if (payload.author) {
         dispatch(setOpenModal(false));
@@ -67,7 +81,11 @@ const EditPost = (post) => {
               onChange={(e) => setText(() => e.target.value)}
             />
           </Grid>
-          <ImageUpload imageUrl={post.image?.imageUrl} />
+          <ImageUpload
+            imageUrl={post.image?.imageUrl}
+            file={file}
+            setFile={setFile}
+          />
           <Grid
             item
             xs={12}

@@ -35,7 +35,7 @@ export const apiSlice = createApi({
     }),
     editPosts: builder.mutation({
       query: (post) => ({
-        url: `/posts/${post.id}`,
+        url: `/posts/${post.get('id')}`,
         method: 'PATCH',
         body: post,
       }),

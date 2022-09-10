@@ -10,9 +10,13 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-const ImageUpload = ({ imageUrl }) => {
-  const [file, setFile] = useState(null);
+const ImageUpload = ({ imageUrl, file, setFile }) => {
   const [originalFile, setOriginal] = useState(imageUrl);
+  const changeImage = (e) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
   return (
     <Grid
       width={'100%'}
@@ -29,7 +33,7 @@ const ImageUpload = ({ imageUrl }) => {
           sx={{ width: { xs: '100%', sm: 'auto' } }}
         >
           <CameraAlt /> Select Image
-          <input type='file' hidden />
+          <input type='file' hidden onChange={changeImage} />
         </Button>
       </Box>
 
@@ -42,11 +46,15 @@ const ImageUpload = ({ imageUrl }) => {
         <CardMedia
           component='img'
           sx={{ maxHeight: '300px' }}
-          src={(file && file) || (originalFile && originalFile)}
+          src={
+            (file && URL.createObjectURL(file)) ||
+            (originalFile && originalFile)
+          }
         />
         {file && (
           <IconButton
             sx={{ margin: '1rem', position: 'absolute', top: 0, right: 0 }}
+            onClick={() => setFile(null)}
           >
             {' '}
             <Clear color='error' />
