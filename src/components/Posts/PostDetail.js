@@ -37,7 +37,7 @@ const PostDetail = () => {
   }
 
   return (
-    <>
+    <Box flex={4}>
       <h2>{post.title}</h2>
       <section>
         <article className='post'>
@@ -56,7 +56,7 @@ const PostDetail = () => {
       </section>
 
       <EditPost {...post} />
-    </>
+    </Box>
   );
 };
 

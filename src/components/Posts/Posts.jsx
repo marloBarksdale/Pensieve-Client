@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../api';
 import { selectUser } from '../../features/users/userSlice';
+import AddPost from './AddPost';
+import AddPostButton from './AddPostButton';
 import Post from './Post/Post';
 
 const Posts = () => {
@@ -20,17 +22,20 @@ const Posts = () => {
   const { isLoading, data: posts, isFetching } = useGetPostsQuery('', { skip });
 
   return isLoading ? (
-    <Box flex={4}>
-      <CircularProgress
-        sx={{
-          top: '50%',
-          left: '50%',
-          position: 'fixed',
-          marginTop: '-12px',
-          marginLeft: '-12px',
-        }}
-      />
-    </Box>
+    <>
+      <AddPostButton />
+      <Box flex={4}>
+        <CircularProgress
+          sx={{
+            top: '50%',
+            left: '50%',
+            position: 'fixed',
+            marginTop: '-12px',
+            marginLeft: '-12px',
+          }}
+        />
+      </Box>
+    </>
   ) : (
     <Box
       flex={4}
@@ -55,6 +60,8 @@ const Posts = () => {
           <Post {...post} key={post._id} />
         ))}
       </Stack>
+      <AddPost />
+      <AddPostButton />
     </Box>
   );
 };

@@ -22,28 +22,11 @@ const Home = () => {
   return (
     <Box display='flex' marginTop={1.5}>
       <LeftNav />
-      <Posts />
+      <Outlet />
 
       <RightNav />
 
-      {modal && <AddPost />}
-
-      <Box
-        sx={{
-          position: 'fixed',
-          bottom: 30,
-          left: { xs: 'calc(85% - 25px)', sm: 'calc(90% - 25px)', md: 30 },
-        }}
-      >
-        <SpeedDial
-          ariaLabel='SpeedDial'
-          hidden={false}
-          icon={<Create />}
-          onClick={() => {
-            dispatch(setOpenModal(true));
-          }}
-        />
-      </Box>
+      {/* {modal && <AddPost />} */}
     </Box>
   );
 };

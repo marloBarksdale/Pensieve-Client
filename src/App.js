@@ -11,6 +11,7 @@ import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import AddPost from './components/Posts/AddPost';
 import PostDetail from './components/Posts/PostDetail';
+import Posts from './components/Posts/Posts';
 import { selectUser } from './features/users/userSlice';
 
 const App = () => {
@@ -28,16 +29,26 @@ const App = () => {
               <Route path='signup' element={<Signup />} />
             </>
           )}
+          {user && (
+            <>
+              <Route index element={<Posts />}></Route>
+              <Route path='posts' element={<Posts />} />
+              <Route
+                path='posts/:id'
+                element={user ? <PostDetail /> : <Navigate to='/login' />}
+              />
+            </>
+          )}
         </Route>
 
-        <Route
+        {/* <Route
           path='posts/:id'
           element={user ? <PostDetail /> : <Navigate to='/login' />}
         />
         <Route
           path='posts'
           element={user ? <Home /> : <Navigate to='/login' />}
-        ></Route>
+        ></Route> */}
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </Box>
