@@ -43,6 +43,10 @@ export const apiSlice = createApi({
         { type: 'Post', id: arg.get('id') },
       ],
     }),
+    deletePost: builder.mutation({
+      query: (id) => ({ url: `/posts/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Post'],
+    }),
     login: builder.mutation({
       query: (loginData) => ({
         url: '/user/login',
@@ -75,4 +79,5 @@ export const {
   useSignupMutation,
   useAddPostMutation,
   useEditPostsMutation,
+  useDeletePostMutation,
 } = apiSlice;

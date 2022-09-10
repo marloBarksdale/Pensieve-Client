@@ -2,8 +2,8 @@ import { Box, Button, CircularProgress } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
-import { useGetPostQuery } from '../../api';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDeletePostMutation, useGetPostQuery } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import StyledModal from '../StyledModal';
 import EditPost from './EditPost';
@@ -12,9 +12,10 @@ const PostDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { data: post, isLoading } = useGetPostQuery(id);
-
+  const [deletePost, {}] = useDeletePostMutation();
   useEffect(() => {
     dispatch(setOpenModal(false));
   }, [location, dispatch]);
@@ -46,8 +47,9 @@ const PostDetail = () => {
           <p className='post-content'>{post.content}</p>
         </article>
         <Button
-          onClick={() => {
-            dispatch(setOpenModal(true));
+          onClick={async () => {
+            await deletePost(id);
+            navigate('/');
           }}
         >
           Delete
