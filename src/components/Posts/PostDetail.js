@@ -1,5 +1,6 @@
 import { Box, Button, CircularProgress } from '@mui/material';
 import React from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -13,8 +14,8 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const { data: post, isLoading } = useGetPostQuery(id);
+  const [skip, setSkip] = useState(false);
+  const { data: post, isLoading } = useGetPostQuery(id, { skip });
   const [deletePost, {}] = useDeletePostMutation();
   useEffect(() => {
     dispatch(setOpenModal(false));
@@ -48,7 +49,9 @@ const PostDetail = () => {
         </article>
         <Button
           onClick={async () => {
+            setSkip(true);
             await deletePost(id);
+
             navigate('/');
           }}
         >
