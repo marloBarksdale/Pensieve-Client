@@ -39,7 +39,9 @@ export const apiSlice = createApi({
         method: 'PATCH',
         body: post,
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Post', id: arg.get('id') },
+      ],
     }),
     login: builder.mutation({
       query: (loginData) => ({

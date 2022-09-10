@@ -6,15 +6,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAddPostMutation } from '../../api';
 import StyledModal from '../StyledModal';
+import ImageUpload from './ImageUpload';
 
 const AddPost = () => {
   const textRef = useRef();
   const titleRef = useRef();
-
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const [addPost, { isLoading }] = useAddPostMutation();
 
@@ -66,9 +67,7 @@ const AddPost = () => {
               inputRef={textRef}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Input type='file' />
-          </Grid>
+          <ImageUpload setFile={setFile} file={file} />
           <Grid
             item
             xs={12}

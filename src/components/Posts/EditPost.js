@@ -26,7 +26,7 @@ const EditPost = (post) => {
     e.preventDefault();
     const updatedPost = { id: post._id, title, text };
     const formData = new FormData();
-    console.log(file);
+
     if (file) {
       formData.append('image', file);
     }
@@ -34,7 +34,7 @@ const EditPost = (post) => {
     formData.append('title', title);
     formData.append('text', text);
     formData.append('id', post._id);
-    console.log(formData.get('id'));
+    // console.log(formData.get('id'));
     // for (let [key, value] of formData.entries()) {
     //   console.log(`${key}: ${value}`);
     // }
