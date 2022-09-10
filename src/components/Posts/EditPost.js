@@ -67,7 +67,7 @@ const EditPost = (post) => {
               onChange={(e) => setText(() => e.target.value)}
             />
           </Grid>
-          {post.image && <ImageUpload imageUrl={post.image.imageUrl} />}
+          <ImageUpload imageUrl={post.image?.imageUrl} />
           <Grid
             item
             xs={12}
@@ -85,8 +85,7 @@ const EditPost = (post) => {
             ) : (
               <Button
                 type='submit'
-                fullWidth
-                sx={{ marginTop: 3 }}
+                sx={{ marginTop: 3, width: { xs: '100%', sm: 'auto' } }}
                 variant='outlined'
               >
                 Submit

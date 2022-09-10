@@ -1,4 +1,4 @@
-import { Clear } from '@mui/icons-material';
+import { Camera, CameraAlt, Clear } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import {
 import React, { useState } from 'react';
 
 const ImageUpload = ({ imageUrl }) => {
-  const [file, setFile] = useState(imageUrl.toString() || null);
+  const [file, setFile] = useState(imageUrl || null);
 
   return (
     <Grid
@@ -21,8 +21,9 @@ const ImageUpload = ({ imageUrl }) => {
       justifyContent={'center'}
       flexDirection='column'
     >
-      <Button>
-        <input type='file' />
+      <Button variant='contained' component='label'>
+        <CameraAlt /> Select Image
+        <input type='file' hidden />
       </Button>
       <Box
         component={Container}
@@ -36,12 +37,14 @@ const ImageUpload = ({ imageUrl }) => {
           src={file && file}
           image={file}
         />
-        <IconButton
-          sx={{ margin: '1rem', position: 'absolute', top: 0, right: 0 }}
-        >
-          {' '}
-          <Clear color='error' />
-        </IconButton>
+        {file && (
+          <IconButton
+            sx={{ margin: '1rem', position: 'absolute', top: 0, right: 0 }}
+          >
+            {' '}
+            <Clear color='error' />
+          </IconButton>
+        )}
       </Box>
     </Grid>
   );
