@@ -2,7 +2,7 @@ import { Create } from '@mui/icons-material';
 import { Box, SpeedDial } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import LeftNav from '../LeftNav/LeftNav';
 import AddPost from '../Posts/AddPost';
@@ -21,8 +21,8 @@ const Home = () => {
   return (
     <Box display='flex' marginTop={1.5}>
       <LeftNav />
-      <Posts />
-
+      {/* <Posts /> */}
+      <Outlet />
       <RightNav />
       {modal && <AddPost />}
 

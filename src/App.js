@@ -9,7 +9,9 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import Post from './components/Posts/Post/Post';
 import PostDetail from './components/Posts/PostDetail';
+import Posts from './components/Posts/Posts';
 import { selectUser } from './features/users/userSlice';
 
 const App = () => {
@@ -30,13 +32,12 @@ const App = () => {
         </Route>
 
         <Route
-          path='posts/:id'
-          element={user ? <PostDetail /> : <Navigate to='/login' />}
-        />
-        <Route
           path='posts'
           element={user ? <Home /> : <Navigate to='/login' />}
-        ></Route>
+        >
+          <Route index element={<Posts />} />
+          <Route path=':id' element={<PostDetail />} />
+        </Route>
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </Box>
