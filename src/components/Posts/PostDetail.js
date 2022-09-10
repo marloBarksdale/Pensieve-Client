@@ -45,7 +45,13 @@ const PostDetail = () => {
 
           <p className='post-content'>{post.content}</p>
         </article>
-
+        <Button
+          onClick={() => {
+            dispatch(setOpenModal(true));
+          }}
+        >
+          Delete
+        </Button>{' '}
         <Button
           onClick={() => {
             dispatch(setOpenModal(true));
