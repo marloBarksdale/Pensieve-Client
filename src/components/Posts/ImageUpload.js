@@ -17,14 +17,22 @@ const ImageUpload = ({ imageUrl }) => {
     <Grid
       width={'100%'}
       display='flex'
+      gap={1}
       item
       justifyContent={'center'}
       flexDirection='column'
     >
-      <Button variant='contained' component='label'>
-        <CameraAlt /> Select Image
-        <input type='file' hidden />
-      </Button>
+      <Box justifyContent={'center'} display='flex'>
+        <Button
+          variant='contained'
+          component='label'
+          sx={{ width: { xs: '100%', sm: 'auto' } }}
+        >
+          <CameraAlt /> Select Image
+          <input type='file' hidden />
+        </Button>
+      </Box>
+
       <Box
         component={Container}
         position={'relative'}
