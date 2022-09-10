@@ -24,10 +24,17 @@ const AddPost = () => {
     const title = titleRef.current.value;
     const text = textRef.current.value;
 
-    console.log('hello');
+    const formData = new FormData();
+
+    if (file) {
+      formData.append('image', file);
+    }
+
+    formData.append('title', title);
+    formData.append('text', text);
 
     try {
-      const payload = await addPost({ title, text }).unwrap();
+      const payload = await addPost(formData).unwrap();
 
       if (payload.author) {
         navigate('/');
