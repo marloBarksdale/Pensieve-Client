@@ -2,6 +2,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Input,
   TextField,
   Typography,
 } from '@mui/material';
@@ -66,10 +67,7 @@ const AddPost = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant='contained' component='label'>
-              Upload File
-              <input type='file' hidden />
-            </Button>
+            <Input type='file' />
           </Grid>
           <Grid
             item

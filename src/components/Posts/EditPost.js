@@ -1,16 +1,18 @@
 import {
+  Box,
   Button,
   CircularProgress,
   Grid,
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useAddPostMutation, useEditPostsMutation } from '../../api';
+import { useEditPostsMutation } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import StyledModal from '../StyledModal';
+import ImageUpload from './ImageUpload';
 
 const EditPost = (post) => {
   const [title, setTitle] = useState(post.title);
@@ -18,7 +20,7 @@ const EditPost = (post) => {
   const navigate = useNavigate();
   const [editPost, { isLoading }] = useEditPostsMutation();
   const dispatch = useDispatch();
-
+  console.log(post.image.imageUrl);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,12 +67,7 @@ const EditPost = (post) => {
               onChange={(e) => setText(() => e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Button variant='contained' component='label'>
-              Upload File
-              <input type='file' hidden />
-            </Button>
-          </Grid>
+          {post.image && <ImageUpload imageUrl={post.image.imageUrl} />}
           <Grid
             item
             xs={12}
