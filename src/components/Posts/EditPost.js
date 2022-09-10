@@ -20,7 +20,7 @@ const EditPost = (post) => {
   const navigate = useNavigate();
   const [editPost, { isLoading }] = useEditPostsMutation();
   const dispatch = useDispatch();
-  console.log(post.image.imageUrl);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
