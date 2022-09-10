@@ -11,8 +11,8 @@ import {
 import React, { useState } from 'react';
 
 const ImageUpload = ({ imageUrl }) => {
-  const [file, setFile] = useState(imageUrl || null);
-
+  const [file, setFile] = useState(null);
+  const [originalFile, setOriginal] = useState(imageUrl);
   return (
     <Grid
       width={'100%'}
@@ -42,8 +42,7 @@ const ImageUpload = ({ imageUrl }) => {
         <CardMedia
           component='img'
           sx={{ maxHeight: '300px' }}
-          src={file && file}
-          image={file}
+          src={(file && file) || (originalFile && originalFile)}
         />
         {file && (
           <IconButton
