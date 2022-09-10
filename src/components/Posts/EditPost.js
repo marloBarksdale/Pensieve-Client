@@ -52,7 +52,7 @@ const EditPost = (post) => {
   return (
     <StyledModal>
       <Typography variant='h5' textAlign={'center'}>
-        Say something...
+        Edit Post
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>

@@ -8,6 +8,7 @@ import LeftNav from '../LeftNav/LeftNav';
 import AddPost from '../Posts/AddPost';
 import Posts from '../Posts/Posts';
 import RightNav from '../RightNav/RightNav';
+import StyledModal from '../StyledModal';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,10 @@ const Home = () => {
   return (
     <Box display='flex' marginTop={1.5}>
       <LeftNav />
-      {/* <Posts /> */}
-      <Outlet />
+      <Posts />
+
       <RightNav />
+
       {modal && <AddPost />}
 
       <Box

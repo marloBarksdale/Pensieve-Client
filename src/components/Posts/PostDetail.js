@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { useGetPostQuery } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
+import StyledModal from '../StyledModal';
 import EditPost from './EditPost';
 
 const PostDetail = () => {
@@ -53,6 +54,7 @@ const PostDetail = () => {
           Edit Post
         </Button>
       </section>
+
       <EditPost {...post} />
     </>
   );
