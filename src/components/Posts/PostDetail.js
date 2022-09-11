@@ -32,7 +32,7 @@ import EditPost from './EditPost';
 
 const PostDetail = () => {
   const { id } = useParams();
-  const popupState = usePopupState({ variant: 'popper', popupId: 'demoMenu' });
+  const popupState = usePopupState({ variant: 'popper' });
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ const PostDetail = () => {
     <Box flex={4} ml={1} mr={1}>
       <Card elevation={12}>
         <CardHeader
-          title={<Typography variant='h4'>{post.title}</Typography>}
+          title={<Typography variant='h6'>{post.title}</Typography>}
         ></CardHeader>
 
         {post.image && (

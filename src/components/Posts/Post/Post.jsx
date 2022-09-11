@@ -21,8 +21,11 @@ const Post = ({ title, author, _id, image, text }) => {
 
   const cardTitle = (
     <>
-      <Typography>{title}</Typography>
-      <Typography> {author.first_name + ' ' + author.last_name}</Typography>
+      <Typography fontWeight={700}>{title}</Typography>
+      <Typography fontWeight={300} variant='body1'>
+        {' '}
+        {author.first_name + ' ' + author.last_name}
+      </Typography>
     </>
   );
 
