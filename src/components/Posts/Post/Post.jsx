@@ -21,7 +21,6 @@ const Post = ({ title, author, _id, image, text }) => {
 
   const cardTitle = (
     <>
-      {' '}
       <Typography>{title}</Typography>
       <Typography> {author.first_name + ' ' + author.last_name}</Typography>
     </>
@@ -30,7 +29,14 @@ const Post = ({ title, author, _id, image, text }) => {
   return (
     <Card elevation={24}>
       <CardHeader
-        avatar={<Avatar aria-label='recipe'>R</Avatar>}
+        avatar={
+          <Avatar aria-label='recipe'>
+            {' '}
+            {author.first_name.substring(0, 1) +
+              ' ' +
+              author.last_name.substring(0, 1)}{' '}
+          </Avatar>
+        }
         action={
           <IconButton aria-label='settings'>
             <MoreVert />
