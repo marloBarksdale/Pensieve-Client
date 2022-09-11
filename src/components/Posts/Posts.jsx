@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container, Stack } from '@mui/material';
+import { Box, CircularProgress, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../api';

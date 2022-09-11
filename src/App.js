@@ -9,7 +9,6 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
-import AddPost from './components/Posts/AddPost';
 import PostDetail from './components/Posts/PostDetail';
 import Posts from './components/Posts/Posts';
 import { selectUser } from './features/users/userSlice';

@@ -1,23 +1,15 @@
-import {
-  AccountBox,
-  Diversity3,
-  Home,
-  Inbox,
-  Settings,
-} from '@mui/icons-material';
+import { AccountBox, Diversity3, Home, Settings } from '@mui/icons-material';
 import {
   Box,
-  createTheme,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Paper,
   styled,
   Switch,
 } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,

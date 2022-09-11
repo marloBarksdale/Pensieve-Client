@@ -1,5 +1,4 @@
 import {
-  CommentBank,
   CommentSharp,
   DeleteForever,
   Edit,
@@ -18,15 +17,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDeletePostMutation, useGetPostQuery } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import { selectUser } from '../../features/users/userSlice';
-import StyledModal from '../StyledModal';
 import EditPost from './EditPost';
 
 const PostDetail = () => {
@@ -36,7 +32,7 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const [skip, setSkip] = useState(false);
   const { data: post, isLoading } = useGetPostQuery(id, { skip });
-  const [deletePost, {}] = useDeletePostMutation();
+  const [deletePost] = useDeletePostMutation();
   const user = useSelector((state) => selectUser(state));
   useEffect(() => {
     dispatch(setOpenModal(false));

@@ -1,4 +1,4 @@
-import { Camera, CameraAlt, Clear } from '@mui/icons-material';
+import { CameraAlt, Clear } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -6,7 +6,6 @@ import {
   Container,
   Grid,
   IconButton,
-  Input,
 } from '@mui/material';
 import React, { useState } from 'react';
 

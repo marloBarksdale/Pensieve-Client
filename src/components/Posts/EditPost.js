@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   CircularProgress,
   Grid,
@@ -8,7 +7,6 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useEditPostsMutation } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import StyledModal from '../StyledModal';
@@ -18,13 +16,13 @@ const EditPost = (post) => {
   const [title, setTitle] = useState(post.title);
   const [text, setText] = useState(post.text);
   const [file, setFile] = useState(null);
-  const navigate = useNavigate();
+
   const [editPost, { isLoading }] = useEditPostsMutation();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedPost = { id: post._id, title, text };
+
     const formData = new FormData();
 
     if (file) {
