@@ -37,11 +37,6 @@ const Post = ({ title, author, _id, image, text }) => {
               author.last_name.substring(0, 1)}{' '}
           </Avatar>
         }
-        action={
-          <IconButton aria-label='settings'>
-            <MoreVert />
-          </IconButton>
-        }
         title={cardTitle}
         subheader='September 14, 2016'
       />

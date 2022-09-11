@@ -3,6 +3,7 @@ import {
   DeleteForever,
   Edit,
   Favorite,
+  MoreVert,
 } from '@mui/icons-material';
 import {
   Avatar,
@@ -14,19 +15,24 @@ import {
   CardMedia,
   CircularProgress,
   IconButton,
+  ListItemIcon,
+  MenuItem,
   Stack,
   Typography,
 } from '@mui/material';
+import { usePopupState } from 'material-ui-popup-state/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDeletePostMutation, useGetPostQuery } from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import { selectUser } from '../../features/users/userSlice';
+import MenuPopupState from '../MenuPopupState';
 import EditPost from './EditPost';
 
 const PostDetail = () => {
   const { id } = useParams();
+  const popupState = usePopupState({ variant: 'popper', popupId: 'demoMenu' });
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,11 +61,37 @@ const PostDetail = () => {
     );
   }
 
+  const handleDelete = async () => {
+    setSkip(true);
+    await deletePost(id);
+    popupState.close();
+    navigate('/');
+  };
+
+  const handleEdit = () => {
+    dispatch(setOpenModal(true));
+    popupState.close();
+  };
+
+  const menuItems = [
+    <MenuItem onClick={handleEdit} key='212'>
+      <ListItemIcon>
+        <Edit />
+      </ListItemIcon>
+      Edit
+    </MenuItem>,
+    <MenuItem onClick={handleDelete} key='ewrere'>
+      <ListItemIcon>
+        <DeleteForever />
+      </ListItemIcon>
+      Delete
+    </MenuItem>,
+  ];
+
   return (
     <Box flex={4} ml={1} mr={1}>
       <Card elevation={12}>
         <CardHeader
-          subheader
           title={<Typography variant='h4'>{post.title}</Typography>}
         ></CardHeader>
 
@@ -105,7 +137,32 @@ const PostDetail = () => {
             </CardActions>
           </Stack>
           {user._id === post.author._id && (
-            <Box
+            <MenuPopupState
+              menuItems={menuItems}
+              popupState={popupState}
+              Icon={<MoreVert />}
+            />
+          )}
+        </Box>
+      </Card>
+
+      <section>
+        <article className='post'>
+          <div></div>
+
+          <p className='post-content'>{post.content}</p>
+        </article>
+      </section>
+
+      <EditPost {...post} />
+    </Box>
+  );
+};
+
+export default PostDetail;
+
+{
+  /* <Box
               padding={2}
               display={'flex'}
               gap={2}
@@ -133,22 +190,5 @@ const PostDetail = () => {
               >
                 Delete
               </Button>{' '}
-            </Box>
-          )}
-        </Box>
-      </Card>
-
-      <section>
-        <article className='post'>
-          <div></div>
-
-          <p className='post-content'>{post.content}</p>
-        </article>
-      </section>
-
-      <EditPost {...post} />
-    </Box>
-  );
-};
-
-export default PostDetail;
+            </Box> */
+}
