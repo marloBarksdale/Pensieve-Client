@@ -12,13 +12,18 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-const Post = ({ title, author, _id, image, text }) => {
+import { useLikePostMutation } from '../../../api';
+const Post = ({ title, author, _id, image, text, likes }) => {
   const navigate = useNavigate();
+  const [likePost] = useLikePostMutation();
 
   const openPost = () => {
     navigate(`/posts/${_id}`);
   };
 
+  const handleLike = async () => {
+    await likePost({ postId: _id, userId: author._id });
+  };
   const cardTitle = (
     <>
       <Typography fontWeight={700}>{title}</Typography>
@@ -59,10 +64,14 @@ const Post = ({ title, author, _id, image, text }) => {
         </CardContent>
       )}
       <CardActions disableSpacing>
-        <IconButton aria-label='add to favorites'>
-          <Favorite />
-        </IconButton>
-
+        <IconButton
+          sx={{ display: 'flex', gap: '5px', alignItems: 'flex-start' }}
+          aria-label='add to favorites'
+          onClick={handleLike}
+        >
+          <Favorite color={likes.includes(author._id) ? 'error' : ''} />{' '}
+          <Typography variant='overline'>{likes.length}</Typography>
+        </IconButton>{' '}
         <IconButton aria-label='share'>
           <Share />
         </IconButton>

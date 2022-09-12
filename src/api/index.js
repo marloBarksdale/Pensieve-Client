@@ -43,6 +43,34 @@ export const apiSlice = createApi({
         { type: 'Post', id: arg.get('id') },
       ],
     }),
+    likePost: builder.mutation({
+      query: ({ postId, userId }) => ({
+        url: `/posts/${postId}/like`,
+        method: 'PATCH',
+      }),
+      async onQueryStarted({ postId, userId }, { dispatch, queryFulfilled }) {
+        const result = dispatch(
+          apiSlice.util.updateQueryData('getPosts', '', (draft) => {
+            const post = draft.find((post) => post._id === postId);
+
+            if (post) {
+              if (post.likes.includes(userId)) {
+                post.likes = post.likes.filter((like) => like !== userId);
+              } else {
+                post.likes.push(userId);
+              }
+            }
+          }),
+        );
+        console.log(result);
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          result.undo();
+        }
+      },
+    }),
+
     deletePost: builder.mutation({
       query: (id) => ({ url: `/posts/${id}`, method: 'DELETE' }),
       invalidatesTags: ['Post'],
@@ -80,4 +108,5 @@ export const {
   useAddPostMutation,
   useEditPostsMutation,
   useDeletePostMutation,
+  useLikePostMutation,
 } = apiSlice;
