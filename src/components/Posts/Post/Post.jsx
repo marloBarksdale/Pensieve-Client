@@ -25,7 +25,7 @@ const Post = ({ title, author, _id, image, text, likes }) => {
   };
 
   const handleLike = async () => {
-    await likePost({ postId: _id, userId: author._id });
+    await likePost({ postId: _id, userId: user._id });
   };
   const cardTitle = (
     <>
