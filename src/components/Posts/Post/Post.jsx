@@ -11,11 +11,14 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLikePostMutation } from '../../../api';
+import { selectUser } from '../../../features/users/userSlice';
 const Post = ({ title, author, _id, image, text, likes }) => {
   const navigate = useNavigate();
   const [likePost] = useLikePostMutation();
+  const user = useSelector((state) => selectUser(state));
 
   const openPost = () => {
     navigate(`/posts/${_id}`);
@@ -69,7 +72,7 @@ const Post = ({ title, author, _id, image, text, likes }) => {
           aria-label='add to favorites'
           onClick={handleLike}
         >
-          <Favorite color={likes.includes(author._id) ? 'error' : ''} />{' '}
+          <Favorite color={likes.includes(user._id) ? 'error' : ''} />{' '}
           <Typography variant='overline'>{likes.length}</Typography>
         </IconButton>{' '}
         <IconButton aria-label='share'>
