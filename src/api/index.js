@@ -43,6 +43,31 @@ export const apiSlice = createApi({
         { type: 'Post', id: arg.get('id') },
       ],
     }),
+    likePost2: builder.mutation({
+      query: ({ postId, userId }) => ({
+        url: `/posts/${postId}/like`,
+        method: 'PATCH',
+      }),
+
+      async onQueryStarted({ userId, postId }, { dispatch, queryFulfilled }) {
+        const result = dispatch(
+          apiSlice.util.updateQueryData('getPost', postId, (draft) => {
+            if (draft.likes.includes(userId)) {
+              draft.likes = draft.likes.filter((like) => like !== userId);
+            } else {
+              draft.likes.push(userId);
+            }
+          }),
+        );
+
+        try {
+          await queryFulfilled;
+          console.log(result);
+        } catch (error) {
+          result.undo();
+        }
+      },
+    }),
     likePost: builder.mutation({
       query: ({ postId, userId }) => ({
         url: `/posts/${postId}/like`,
@@ -61,10 +86,19 @@ export const apiSlice = createApi({
               }
             }
           }),
+
+          // apiSlice.util.updateQueryData('getPost', postId, (draft) => {
+          //   if (draft.likes.includes(userId)) {
+          //     draft.likes = draft.likes.filter((like) => like !== userId);
+          //   } else {
+          //     draft.likes.push(userId);
+          //   }
+          // }),
         );
-        console.log(result);
+
         try {
           await queryFulfilled;
+          console.log(result);
         } catch (error) {
           result.undo();
         }
@@ -109,4 +143,5 @@ export const {
   useEditPostsMutation,
   useDeletePostMutation,
   useLikePostMutation,
+  useLikePost2Mutation,
 } = apiSlice;

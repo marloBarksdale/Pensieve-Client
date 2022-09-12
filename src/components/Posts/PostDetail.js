@@ -24,7 +24,12 @@ import { usePopupState } from 'material-ui-popup-state/hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDeletePostMutation, useGetPostQuery } from '../../api';
+import {
+  useDeletePostMutation,
+  useGetPostQuery,
+  useLikePost2Mutation,
+  useLikePostMutation,
+} from '../../api';
 import { setOpenModal } from '../../features/posts/postsSlice';
 import { selectUser } from '../../features/users/userSlice';
 import MenuPopupState from '../MenuPopupState';
@@ -39,7 +44,9 @@ const PostDetail = () => {
   const [skip, setSkip] = useState(false);
   const { data: post, isLoading } = useGetPostQuery(id, { skip });
   const [deletePost] = useDeletePostMutation();
+  const [likePost] = useLikePost2Mutation();
   const user = useSelector((state) => selectUser(state));
+
   useEffect(() => {
     dispatch(setOpenModal(false));
   }, [location, dispatch]);
@@ -67,7 +74,11 @@ const PostDetail = () => {
     popupState.close();
     navigate('/');
   };
-
+  const handleLike = async () => {
+    try {
+      await likePost({ userId: user._id, postId: post._id });
+    } catch (error) {}
+  };
   const handleEdit = () => {
     dispatch(setOpenModal(true));
     popupState.close();
@@ -122,10 +133,14 @@ const PostDetail = () => {
             />
             <CardActions disableSpacing sx={{ paddingTop: '0' }}>
               <IconButton
+                onClick={handleLike}
                 sx={{ display: 'flex', gap: '5px' }}
                 aria-label='add to favorites'
               >
-                <Favorite /> <Typography variant='overline'>6</Typography>
+                <Favorite
+                  color={post.likes.includes(user._id) ? 'error' : ''}
+                />{' '}
+                <Typography variant='overline'>{post.likes.length}</Typography>
               </IconButton>{' '}
               <IconButton
                 sx={{ display: 'flex', gap: '5px' }}
