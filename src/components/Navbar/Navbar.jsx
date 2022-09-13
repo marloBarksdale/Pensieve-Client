@@ -69,9 +69,11 @@ const Navbar = () => {
               <Notifications />
             </Badge>
             <Avatar
-              sx={{ width: '30px', height: '30px' }}
+              sx={{ width: '40px', height: '40px' }}
               // onClick={() => setOpen((prev) => !prev)}
-            />
+            >
+              {user.first_name.substring(0, 1)} {user.last_name.substring(0, 1)}
+            </Avatar>
           </Box>
         )}
       </Toolbar>
