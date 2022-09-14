@@ -42,7 +42,7 @@ const PostDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [skip, setSkip] = useState(false);
-  const { data: post, isLoading } = useGetPostQuery(id, { skip });
+  const { data: post, isLoading, isFetching } = useGetPostQuery(id, { skip });
   const [deletePost] = useDeletePostMutation();
   const [likePost] = useLikePost2Mutation();
   const user = useSelector((state) => selectUser(state));
@@ -100,77 +100,97 @@ const PostDetail = () => {
   ];
 
   return (
-    <Box flex={4} ml={1} mr={1}>
-      <Card elevation={12}>
-        <CardHeader
-          title={<Typography variant='h6'>{post.title}</Typography>}
-        ></CardHeader>
-
-        {post.image && (
-          <CardMedia component='img' image={post?.image?.imageUrl} />
-        )}
+    <Stack direction={'column'} flex={4} position={'relative'}>
+      {isFetching && (
         <Box
+          width='100%'
+          flex={4}
           display={'flex'}
-          justifyContent='space-between'
-          alignItems={'center'}
+          justifyContent='center'
+          position={'absolute'}
+          top={'calc(50% - 12px)'}
+          zIndex={5}
         >
-          <Stack>
-            <CardHeader
-              sx={{ paddingBottom: '0' }}
-              title={
-                <Typography variant='body1' fontWeight={'700'}>
-                  {post.author.first_name + ' ' + post.author.last_name}
-                </Typography>
-              }
-              subheader={<Typography variant='overline'>3 hrs ago</Typography>}
-              avatar={
-                <Avatar>
-                  {post.author.first_name.substring(0, 1) +
-                    ' ' +
-                    post.author.last_name.substring(0, 1)}
-                </Avatar>
-              }
-            />
-            <CardActions disableSpacing sx={{ paddingTop: '0' }}>
-              <IconButton
-                onClick={handleLike}
-                sx={{ display: 'flex', gap: '5px' }}
-                aria-label='add to favorites'
-              >
-                <Favorite
-                  color={post.likes.includes(user._id) ? 'error' : ''}
-                />{' '}
-                <Typography variant='overline'>{post.likes.length}</Typography>
-              </IconButton>{' '}
-              <IconButton
-                sx={{ display: 'flex', gap: '5px' }}
-                aria-label='add to favorites'
-              >
-                <CommentSharp />
-                <Typography variant='overline'>2</Typography>
-              </IconButton>
-            </CardActions>
-          </Stack>
-          {user._id === post.author._id && (
-            <MenuPopupState
-              menuItems={menuItems}
-              popupState={popupState}
-              Icon={<MoreVert />}
-            />
-          )}
+          {' '}
+          <CircularProgress />
         </Box>
-      </Card>
+      )}
+      <Box flex={4} ml={1} mr={1} className={isFetching ? 'disabled' : ''}>
+        <Card elevation={12}>
+          <CardHeader
+            title={<Typography variant='h6'>{post.title}</Typography>}
+          ></CardHeader>
 
-      <section>
-        <article className='post'>
-          <div></div>
+          {post.image && (
+            <CardMedia component='img' image={post?.image?.imageUrl} />
+          )}
+          <Box
+            display={'flex'}
+            justifyContent='space-between'
+            alignItems={'center'}
+          >
+            <Stack>
+              <CardHeader
+                sx={{ paddingBottom: '0' }}
+                title={
+                  <Typography variant='body1' fontWeight={'700'}>
+                    {post.author.first_name + ' ' + post.author.last_name}
+                  </Typography>
+                }
+                subheader={
+                  <Typography variant='overline'>3 hrs ago</Typography>
+                }
+                avatar={
+                  <Avatar>
+                    {post.author.first_name.substring(0, 1) +
+                      ' ' +
+                      post.author.last_name.substring(0, 1)}
+                  </Avatar>
+                }
+              />
+              <CardActions disableSpacing sx={{ paddingTop: '0' }}>
+                <IconButton
+                  onClick={handleLike}
+                  sx={{ display: 'flex', gap: '5px' }}
+                  aria-label='add to favorites'
+                >
+                  <Favorite
+                    color={post.likes.includes(user._id) ? 'error' : ''}
+                  />{' '}
+                  <Typography variant='overline'>
+                    {post.likes.length}
+                  </Typography>
+                </IconButton>{' '}
+                <IconButton
+                  sx={{ display: 'flex', gap: '5px' }}
+                  aria-label='add to favorites'
+                >
+                  <CommentSharp />
+                  <Typography variant='overline'>2</Typography>
+                </IconButton>
+              </CardActions>
+            </Stack>
+            {user._id === post.author._id && (
+              <MenuPopupState
+                menuItems={menuItems}
+                popupState={popupState}
+                Icon={<MoreVert />}
+              />
+            )}
+          </Box>
+        </Card>
 
-          <p className='post-content'>{post.content}</p>
-        </article>
-      </section>
+        <section>
+          <article className='post'>
+            <div></div>
 
-      <EditPost {...post} />
-    </Box>
+            <p className='post-content'>{post.content}</p>
+          </article>
+        </section>
+
+        <EditPost {...post} />
+      </Box>
+    </Stack>
   );
 };
 
