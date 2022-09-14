@@ -15,7 +15,7 @@ const Home = () => {
   }, [location, dispatch]); //Closes modal whenever the location changes
 
   return (
-    <Box display='flex' marginTop={1.5} marginBottom={4}>
+    <Box display='flex' marginTop={1.5} paddingBottom={3}>
       <Sidenav />
       <Outlet />
 
