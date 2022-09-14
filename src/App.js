@@ -20,21 +20,25 @@ const App = () => {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: '#1760a5',
-        light: '#f9f9f9',
+        main: '#9d69a3',
+        light: '#e85d75',
       },
       secondary: {
-        main: '#b3b3b3',
+        main: '#f5fbef',
       },
       otherColor: {
         main: '#f09f',
       },
-      mode: 'light',
+      mode: 'dark',
     },
   });
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={'background.default'} color={'text.primary'}>
+      <Box
+        bgcolor={'background.default'}
+        color={'text.primary'}
+        minHeight='100vh'
+      >
         <Navbar />
         <Routes>
           <Route path='/' element={user ? <Home /> : <Auth />}>
