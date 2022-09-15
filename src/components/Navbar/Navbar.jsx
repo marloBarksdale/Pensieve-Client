@@ -70,10 +70,8 @@ const Navbar = () => {
             </Badge>
             <Avatar
               sx={{ width: '40px', height: '40px' }}
-              // onClick={() => setOpen((prev) => !prev)}
-            >
-              {user.first_name.substring(0, 1)} {user.last_name.substring(0, 1)}
-            </Avatar>
+              src={user.avatar?.imageUrl}
+            ></Avatar>
           </Box>
         )}
       </Toolbar>
