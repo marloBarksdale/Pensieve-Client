@@ -5,15 +5,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignupMutation } from '../../api';
+import ImageUpload from '../Posts/ImageUpload';
 
 const Signup = () => {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
+  const [file, setFile] = useState(null);
 
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
@@ -78,6 +80,7 @@ const Signup = () => {
               inputRef={emailRef}
             />
           </Grid>
+          <ImageUpload file={file} setFile={setFile} />
           <Grid item xs={12}>
             <TextField
               name='password'
