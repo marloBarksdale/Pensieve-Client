@@ -27,13 +27,19 @@ const Signup = () => {
     const first_name = firstNameRef.current.value;
     const last_name = lastNameRef.current.value;
 
+    const form = new FormData();
+
+    if (file) {
+      form.append('avatar', file);
+    }
+
+    form.append('email', email);
+    form.append('password', password);
+    form.append('first_name', first_name);
+    form.append('last_name', last_name);
+
     try {
-      const payload = await signup({
-        email,
-        password,
-        first_name,
-        last_name,
-      }).unwrap();
+      const payload = await signup(form).unwrap();
 
       if (payload.user) {
         navigate('/');
