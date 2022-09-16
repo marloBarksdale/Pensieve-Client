@@ -18,12 +18,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
+    dispatch(clearUser());
     if (jwtDecode(token).exp * 1000 > new Date().getTime()) {
       //Logout if token is still valid
       await logout();
     }
-
-    dispatch(clearUser());
   };
 
   useEffect(() => {
