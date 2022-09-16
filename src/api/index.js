@@ -67,6 +67,9 @@ export const apiSlice = createApi({
           result.undo();
         }
       },
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Post', id: arg.postId },
+      ],
     }),
     likePost: builder.mutation({
       query: ({ postId, userId }) => ({
@@ -103,6 +106,9 @@ export const apiSlice = createApi({
           result.undo();
         }
       },
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Post', id: arg.postId },
+      ],
     }),
 
     deletePost: builder.mutation({

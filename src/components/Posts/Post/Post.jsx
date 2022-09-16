@@ -41,11 +41,11 @@ const Post = ({ title, author, _id, image, text, likes }) => {
     <Card elevation={24}>
       <CardHeader
         avatar={
-          <Avatar aria-label='recipe'>
-            {' '}
+          <Avatar aria-label='recipe' src={author.avatar?.imageUrl}>
+            {/* {' '}
             {author.first_name.substring(0, 1) +
               ' ' +
-              author.last_name.substring(0, 1)}{' '}
+              author.last_name.substring(0, 1)}{' '} */}
           </Avatar>
         }
         title={cardTitle}
