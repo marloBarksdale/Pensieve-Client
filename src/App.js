@@ -29,7 +29,7 @@ const App = () => {
       otherColor: {
         main: '#f09f',
       },
-      mode: 'dark',
+      mode: 'light',
     },
   });
   return (
