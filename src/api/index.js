@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getPosts } from './postEndpoints';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -14,14 +15,7 @@ export const apiSlice = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query({
-      query: () => '/',
-      providesTags: (results = [], error, arg) => [
-        'Post',
-        'LIKE',
-        ...results.map(({ _id }) => ({ type: 'Post', id: _id })),
-      ],
-    }),
+    getPosts: builder.query(getPosts()),
     getPost: builder.query({
       query: (id) => `/posts/${id}`,
       providesTags: (result, error, arg) => [
