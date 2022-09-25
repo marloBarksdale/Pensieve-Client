@@ -166,7 +166,7 @@ const PostDetail = () => {
                     color={post.likes.includes(user._id) ? 'error' : ''}
                   />{' '}
                   <Typography variant='overline'>
-                    {post.likes.length}
+                    {post?.likes?.length > 0 && post.likes.length}
                   </Typography>
                 </IconButton>{' '}
                 <IconButton

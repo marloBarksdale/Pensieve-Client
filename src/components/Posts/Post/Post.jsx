@@ -1,4 +1,4 @@
-import { Favorite, MoreVert, Share } from '@mui/icons-material';
+import { CommentSharp, Favorite, MoreVert, Share } from '@mui/icons-material';
 import {
   Avatar,
   Button,
@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLikePostMutation } from '../../../api';
 import { selectUser } from '../../../features/users/userSlice';
-const Post = ({ title, author, _id, image, text, likes }) => {
+const Post = ({ title, author, _id, image, text, likes, comments }) => {
   const navigate = useNavigate();
   const [likePost] = useLikePostMutation();
   const user = useSelector((state) => selectUser(state));
@@ -75,8 +75,12 @@ const Post = ({ title, author, _id, image, text, likes }) => {
           <Favorite color={likes.includes(user._id) ? 'error' : ''} />{' '}
           <Typography variant='overline'>{likes.length}</Typography>
         </IconButton>{' '}
-        <IconButton aria-label='share'>
-          <Share />
+        <IconButton
+          sx={{ display: 'flex', gap: '5px' }}
+          aria-label='add to favorites'
+        >
+          <CommentSharp />
+          <Typography variant='overline'>{comments || ''}</Typography>
         </IconButton>
         <Button variant='contained' onClick={openPost}>
           View

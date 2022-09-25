@@ -20,6 +20,9 @@ const Posts = () => {
     }
   }, [user]);
   const { isLoading, data: posts, isFetching } = useGetPostsQuery('', { skip });
+  if (posts) {
+    console.log(posts);
+  }
 
   return isLoading ? (
     <>
