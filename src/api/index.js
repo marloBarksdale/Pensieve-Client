@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { login, logout, signup } from './authEndpoints';
 import {
   addPost,
   deletePost,
@@ -23,35 +24,19 @@ export const apiSlice = createApi({
     },
   }),
   endpoints: (builder) => ({
+    //Post enpoints
     getPosts: builder.query(getPosts()),
     getPost: builder.query(getPost()),
     addPost: builder.mutation(addPost()),
     editPosts: builder.mutation(editPost()),
     likePost2: builder.mutation(likePost2()),
     likePost: builder.mutation(likePost()),
-
     deletePost: builder.mutation(deletePost()),
-    login: builder.mutation({
-      query: (loginData) => ({
-        url: '/user/login',
-        body: loginData,
-        method: 'POST',
-      }),
-    }),
-    logout: builder.mutation({
-      query: () => ({
-        url: '/user/logout',
 
-        method: 'POST',
-      }),
-    }),
-    signup: builder.mutation({
-      query: (signupData) => ({
-        url: '/user/signup',
-        method: 'POST',
-        body: signupData,
-      }),
-    }),
+    //Auth endpoints
+    login: builder.mutation(login()),
+    logout: builder.mutation(logout()),
+    signup: builder.mutation(signup()),
   }),
 });
 
