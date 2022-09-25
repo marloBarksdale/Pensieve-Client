@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   addPost,
+  deletePost,
   editPost,
   getPost,
   getPosts,
@@ -29,10 +30,7 @@ export const apiSlice = createApi({
     likePost2: builder.mutation(likePost2()),
     likePost: builder.mutation(likePost()),
 
-    deletePost: builder.mutation({
-      query: (id) => ({ url: `/posts/${id}`, method: 'DELETE' }),
-      invalidatesTags: ['Post'],
-    }),
+    deletePost: builder.mutation(deletePost()),
     login: builder.mutation({
       query: (loginData) => ({
         url: '/user/login',

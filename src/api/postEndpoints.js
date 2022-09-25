@@ -89,3 +89,8 @@ export const likePost = () => ({
   },
   invalidatesTags: (result, error, arg) => ['LIKE2'],
 });
+
+export const deletePost = () => ({
+  query: (id) => ({ url: `/posts/${id}`, method: 'DELETE' }),
+  invalidatesTags: ['Post'],
+});
