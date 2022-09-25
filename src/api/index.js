@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getPost, getPosts } from './postEndpoints';
+import {
+  addPost,
+  editPost,
+  getPost,
+  getPosts,
+  likePost,
+  likePost2,
+} from './postEndpoints';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -17,87 +24,10 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query(getPosts()),
     getPost: builder.query(getPost()),
-    addPost: builder.mutation({
-      query: (postBody) => ({
-        url: '/posts',
-        body: postBody,
-        method: 'POST',
-      }),
-      invalidatesTags: ['Post'],
-    }),
-    editPosts: builder.mutation({
-      query: (post) => ({
-        url: `/posts/${post.get('id')}`,
-        method: 'PATCH',
-        body: post,
-      }),
-      invalidatesTags: (result, error, arg) => [
-        { type: 'Post', id: arg.get('id') },
-      ],
-    }),
-    likePost2: builder.mutation({
-      query: ({ postId, userId }) => ({
-        url: `/posts/${postId}/like`,
-        method: 'PATCH',
-      }),
-
-      async onQueryStarted({ userId, postId }, { dispatch, queryFulfilled }) {
-        const result = dispatch(
-          apiSlice.util.updateQueryData('getPost', postId, (draft) => {
-            if (draft.likes.includes(userId)) {
-              draft.likes = draft.likes.filter((like) => like !== userId);
-            } else {
-              draft.likes.push(userId);
-            }
-          }),
-        );
-
-        try {
-          await queryFulfilled;
-          console.log(result);
-        } catch (error) {
-          result.undo();
-        }
-      },
-      invalidatesTags: (result, error, arg) => [{ type: 'LIKE' }],
-    }),
-    likePost: builder.mutation({
-      query: ({ postId, userId }) => ({
-        url: `/posts/${postId}/like`,
-        method: 'PATCH',
-      }),
-      async onQueryStarted({ postId, userId }, { dispatch, queryFulfilled }) {
-        const result = dispatch(
-          apiSlice.util.updateQueryData('getPosts', '', (draft) => {
-            const post = draft.find((post) => post._id === postId);
-
-            if (post) {
-              if (post.likes.includes(userId)) {
-                post.likes = post.likes.filter((like) => like !== userId);
-              } else {
-                post.likes.push(userId);
-              }
-            }
-          }),
-
-          // apiSlice.util.updateQueryData('getPost', postId, (draft) => {
-          //   if (draft.likes.includes(userId)) {
-          //     draft.likes = draft.likes.filter((like) => like !== userId);
-          //   } else {
-          //     draft.likes.push(userId);
-          //   }
-          // }),
-        );
-
-        try {
-          await queryFulfilled;
-          console.log(result);
-        } catch (error) {
-          result.undo();
-        }
-      },
-      invalidatesTags: (result, error, arg) => ['LIKE2'],
-    }),
+    addPost: builder.mutation(addPost()),
+    editPosts: builder.mutation(editPost()),
+    likePost2: builder.mutation(likePost2()),
+    likePost: builder.mutation(likePost()),
 
     deletePost: builder.mutation({
       query: (id) => ({ url: `/posts/${id}`, method: 'DELETE' }),
