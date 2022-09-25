@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   useDeletePostMutation,
+  useGetCommentsQuery,
   useGetPostQuery,
   useLikePost2Mutation,
   useLikePostMutation,
@@ -41,8 +42,9 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [skip, setSkip] = useState(false);
+  const [skip, setSkip] = useState(false); //Set skip to true to avoid query when post is deleted
   const { data: post, isLoading, isFetching } = useGetPostQuery(id, { skip });
+  const { data: comments } = useGetCommentsQuery(id, { skip });
   const [deletePost] = useDeletePostMutation();
   const [likePost] = useLikePost2Mutation();
   const user = useSelector((state) => selectUser(state));
@@ -98,7 +100,9 @@ const PostDetail = () => {
       Delete
     </MenuItem>,
   ];
-
+  if (comments) {
+    console.log(comments);
+  }
   return (
     <Stack direction={'column'} flex={4} position={'relative'}>
       {isFetching && (

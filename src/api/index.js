@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { login, logout, signup } from './authEndpoints';
+import { getComments } from './commentEndpoints';
 import {
   addPost,
   deletePost,
@@ -37,6 +38,9 @@ export const apiSlice = createApi({
     login: builder.mutation(login()),
     logout: builder.mutation(logout()),
     signup: builder.mutation(signup()),
+
+    //Comment  endpoints
+    getComments: builder.query(getComments()),
   }),
 });
 
@@ -51,4 +55,5 @@ export const {
   useDeletePostMutation,
   useLikePostMutation,
   useLikePost2Mutation,
+  useGetCommentsQuery,
 } = apiSlice;
