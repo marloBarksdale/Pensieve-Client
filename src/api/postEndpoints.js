@@ -53,7 +53,6 @@ export const likePost2 = () => ({
 
     try {
       await queryFulfilled;
-      console.log(result);
     } catch (error) {
       result.undo();
     }
@@ -82,7 +81,6 @@ export const likePost = () => ({
 
     try {
       await queryFulfilled;
-      console.log(result);
     } catch (error) {
       result.undo();
     }

@@ -44,7 +44,11 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const [skip, setSkip] = useState(false); //Set skip to true to avoid query when post is deleted
   const { data: post, isLoading, isFetching } = useGetPostQuery(id, { skip });
-  const { data: comments } = useGetCommentsQuery(id, { skip });
+  const {
+    data: comments,
+    isLoading: loadingComments,
+    isFetching: fetchingComments,
+  } = useGetCommentsQuery(id, { skip });
   const [deletePost] = useDeletePostMutation();
   const [likePost] = useLikePost2Mutation();
   const user = useSelector((state) => selectUser(state));
@@ -170,7 +174,9 @@ const PostDetail = () => {
                   aria-label='add to favorites'
                 >
                   <CommentSharp />
-                  <Typography variant='overline'>2</Typography>
+                  <Typography variant='overline'>
+                    {comments?.length > 0 && comments.length}
+                  </Typography>
                 </IconButton>
               </CardActions>
             </Stack>
